@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>黄小宝</title>
+    <title>yoyo</title>
     <link rel="icon" type="image/svg+xml"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23007AFF' d='M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z'/></svg>">
     <style>
@@ -25,7 +25,7 @@
             right: 0;
             bottom: 0;
             z-index: 0;
-            background: url('avatar.png') center/cover no-repeat;
+            background: url('yoyo.png') center/cover no-repeat;
             filter: blur(32px) brightness(0.7);
             width: 100vw;
             height: 100vh;
@@ -680,9 +680,9 @@
     </div>
     <div class="avatar-section">
         <div class="avatar-center" id="avatarCenter">
-            <img id="avatarImg" src="avatar.png" alt="头像"/>
+            <img id="avatarImg" src="yoyo.png" alt="头像"/>
         </div>
-        <div class="nickname" id="nickname" contenteditable="true">静香</div>
+        <div class="nickname" id="nickname" contenteditable="true">yoyo</div>
     </div>
     <div class="subtitle-area" id="subtitleArea">
         <div class="subtitle-list" id="subtitleList"></div>
@@ -760,7 +760,7 @@
     let lastUserText = '';
     let lastAIText = '';
     let subtitleOn = false;
-    let avatarUrl = 'avatar.png';
+    let avatarUrl = 'yoyo.png';
     // 打断功能相关变量
     let isAISpeaking = false;
     let pcmBuffer = [];
@@ -813,7 +813,7 @@
     // 昵称编辑逻辑
     nickname.addEventListener('blur', function () {
         if (!this.textContent.trim()) {
-            this.textContent = '静香';
+            this.textContent = 'yoyo';
         }
     });
 
