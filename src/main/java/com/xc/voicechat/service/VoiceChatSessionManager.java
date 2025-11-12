@@ -64,23 +64,13 @@ public class VoiceChatSessionManager {
             try {
                 // 尝试解析为JSON
                 JsonObject jsonObject = JsonUtils.parse(message);
-                String type = jsonObject.get(VchatConst.TYPE).getAsString();
+                String type = jsonObject.get(VchatConst.TYPE).toString();
                 
                 if (INTERRUPT.equal(type)) {
                     // 处理打断请求
                     voiceChatSession.interruptAI();
                     // 发送打断确认消息
                     session.sendMessage(new TextMessage(JsonUtils.toJson(new InterruptAckMessage())));
-                } else if ("text".equals(type)) {
-                    // 处理文本消息
-                    String text = jsonObject.get("text").getAsString();
-                    if (text != null && !text.trim().isEmpty()) {
-                        // 发送单次对话开始标识
-                        voiceChatSession.startASR();
-                        // session.sendMessage(new TextMessage(new SessionMessage(MessageType.DIALOG_START.getType()).toJson()));
-                        // 处理文本消息
-                        voiceChatSession.processTextMessage(text, session);
-                    }
                 }
             } catch (Exception e) {
                 if (START.equals(message)) {

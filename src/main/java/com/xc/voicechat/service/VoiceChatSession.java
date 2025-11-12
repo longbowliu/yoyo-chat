@@ -85,23 +85,6 @@ public class VoiceChatSession implements AutoCloseable {
         dialogManager.interruptAI();
     }
 
-    public void processTextMessage(String text, WebSocketSession session) {
-        log.info("收到文本消息: {}", text);
-        try {
-            // 发送ASR消息到前端显示
-            session.sendMessage(new TextMessage(new ASRMessage(text, true).toJson()));
-            
-            // 发送单次对话开始标识
-            session.sendMessage(new TextMessage(new SessionMessage(MessageType.DIALOG_START.getType()).toJson()));
-            
-            // 处理文本消息
-            dialogManager.processCompleteSentence(text, session);
-        } catch (IOException e) {
-            log.error("处理文本消息失败", e);
-            MessageHandler.sendErrorAndAudio(session);
-        }
-    }
-
     public String getSessionId() {
         return unicode;
     }

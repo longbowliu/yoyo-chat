@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>See-Smart</title>
+    <title>黄小宝</title>
     <link rel="icon" type="image/svg+xml"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23007AFF' d='M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 3 2.89 5.35 5.91 5.78V20c0 .55.45 1 1 1s1-.45 1-1v-2.08c3.02-.43 5.42-2.78 5.91-5.78.1-.6-.39-1.14-1-1.14z'/></svg>">
     <style>
@@ -163,9 +163,9 @@
             font-size: 1.4rem;
             font-weight: 500;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            display: block;
+            display: none;
             box-sizing: border-box;
-            opacity: 1;
+            opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.4, 2, .6, 1);
             z-index: 20;
             max-height: 180px;
@@ -186,101 +186,38 @@
             width: 100%;
         }
 
-        .subtitle-area.off {
-            display: none;
-            opacity: 0;
-            transform: translateX(-50%) scale(0.96);
-        }
-
-        .text-input-area {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 25%;
-            width: calc(100% - 48px);
-            max-width: 500px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            z-index: 20;
+        .subtitle-area.on {
+            display: block;
             opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .text-input-area.hide {
-            opacity: 0;
-        }
-
-        .text-input {
-            flex: 1;
-            padding: 12px 18px;
-            border-radius: 18px;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(8px);
-            color: #fff;
-            font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .text-input:focus {
-            border-color: #00eaff;
-            box-shadow: 0 0 8px rgba(0, 234, 255, 0.3);
-        }
-
-        .text-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .send-btn {
-            padding: 12px 24px;
-            border-radius: 18px;
-            background: #00eaff;
-            color: #222;
-            border: none;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .send-btn:hover {
-            background: #00bcd4;
-            transform: scale(1.05);
-        }
-
-        .send-btn:active {
-            transform: scale(0.95);
+            transform: translateX(-50%) scale(1.04);
         }
 
         .subtitle-user {
             color: #00eaff;
             display: block;
             margin-bottom: 8px;
-            font-size: 0.6em;
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
         .subtitle-ai {
             color: #ffd700;
             display: block;
-            font-size: 0.6em;
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
         .subtitle-user:before {
             content: '你：';
             opacity: 0.6;
-            font-size: 0.6em;
+            font-size: 0.9em;
             margin-right: 8px;
         }
 
         .subtitle-ai:before {
             content: 'AI：';
             opacity: 0.6;
-            font-size: 0.6em;
+            font-size: 0.9em;
             margin-right: 8px;
         }
 
@@ -729,11 +666,6 @@
                 <polyline points="20,15 20,20 15,20" fill="none" stroke="#fff" stroke-width="2"/>
             </svg>
         </button>
-        <button class="icon-btn" id="textInputToggle" title="文本输入">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path fill="#fff" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-            </svg>
-        </button>
         <button class="icon-btn" id="subtitleToggle" title="字幕开关">
             <svg viewBox="0 0 24 24" width="24" height="24">
                 <text x="4" y="17" font-size="13" font-family="Arial" fill="#fff">CC</text>
@@ -750,14 +682,10 @@
         <div class="avatar-center" id="avatarCenter">
             <img id="avatarImg" src="avatar.png" alt="头像"/>
         </div>
-        <div class="nickname" id="nickname" contenteditable="true">See-Smart</div>
+        <div class="nickname" id="nickname" contenteditable="true">静香</div>
     </div>
     <div class="subtitle-area" id="subtitleArea">
         <div class="subtitle-list" id="subtitleList"></div>
-    </div>
-    <div class="text-input-area" id="textInputArea">
-        <input type="text" id="textInput" class="text-input" placeholder="输入文本消息..." autocomplete="off"/>
-        <button class="send-btn" id="sendBtn">发送</button>
     </div>
     <div class="call-controls" id="callControls">
         <!-- 初始状态：只显示呼叫按钮 -->
@@ -831,7 +759,7 @@
     let isAudioPlaying = false;
     let lastUserText = '';
     let lastAIText = '';
-    let subtitleOn = true; // 默认启用字幕
+    let subtitleOn = false;
     let avatarUrl = 'avatar.png';
     // 打断功能相关变量
     let isAISpeaking = false;
@@ -844,8 +772,6 @@
     let callState = 'idle'; // idle, calling, inCall
     // 新增：专门用于打断按钮的状态
     let interruptEnabled = false;
-    // 文本输入框相关变量
-    let textInputOn = true; // 默认启用文本输入
 
     // DOM元素
     const callControls = document.getElementById('callControls');
@@ -873,10 +799,6 @@
     const modalOk = document.getElementById('modalOk');
     const toastContainer = document.getElementById('toastContainer');
     const fabInterruptBtn = document.getElementById('fabInterruptBtn');
-    const textInputToggle = document.getElementById('textInputToggle');
-    const textInputArea = document.getElementById('textInputArea');
-    const textInput = document.getElementById('textInput');
-    const sendBtn = document.getElementById('sendBtn');
 
     // 消息类型
     const MessageType = Object.freeze({
@@ -891,7 +813,7 @@
     // 昵称编辑逻辑
     nickname.addEventListener('blur', function () {
         if (!this.textContent.trim()) {
-            this.textContent = 'See-Smart';
+            this.textContent = '静香';
         }
     });
 
@@ -906,11 +828,11 @@
     subtitleToggle.onclick = function () {
         subtitleOn = !subtitleOn;
         if (subtitleOn) {
-            subtitleArea.classList.remove('off');
+            subtitleArea.classList.add('on');
             subtitleToggle.classList.add('active');
             updateSubtitle();
         } else {
-            subtitleArea.classList.add('off');
+            subtitleArea.classList.remove('on');
             subtitleToggle.classList.remove('active');
             setTimeout(() => {
                 if (!subtitleOn) {
@@ -919,66 +841,6 @@
                 }
             }, 300);
         }
-    };
-
-    // 文本输入框开关逻辑
-    function toggleTextInput() {
-        textInputOn = !textInputOn;
-        if (textInputOn) {
-            textInputArea.classList.remove('hide');
-            textInput.focus();
-        } else {
-            textInputArea.classList.add('hide');
-            textInput.value = '';
-        }
-    }
-
-    // 发送文本消息
-    function sendTextMessage() {
-        const text = textInput.value.trim();
-        if (!text) {
-            showToast('请输入消息内容');
-            return;
-        }
-
-        if (!ws || ws.readyState !== WebSocket.OPEN) {
-            showToast('请先建立通话连接');
-            return;
-        }
-
-        // 发送文本消息到服务器
-        try {
-            ws.send(JSON.stringify({
-                type: 'text',
-                text: text
-            }));
-            
-            // 清空输入框
-            textInput.value = '';
-            
-            // 隐藏输入框
-            textInputOn = false;
-            textInputArea.classList.remove('show');
-            
-            showToast('消息已发送');
-        } catch (e) {
-            showToast('发送失败，请重试');
-        }
-    }
-
-    // 发送按钮点击事件
-    sendBtn.onclick = sendTextMessage;
-
-    // 输入框回车发送
-    textInput.onkeydown = function (e) {
-        if (e.key === 'Enter') {
-            sendTextMessage();
-        }
-    };
-
-    // 文本输入按钮点击事件
-    textInputToggle.onclick = function () {
-        toggleTextInput();
     };
 
     // 头像更换逻辑
@@ -1352,6 +1214,7 @@
                 showToast('安全码无效，请重新输入');
                 localStorage.removeItem('securityCode');
             } else if (wsShouldShowError) {
+                showToast('llb test1');
                 showToast('通话连接失败，请检查网络或服务端状态');
             }
             callState = 'idle';
@@ -1359,6 +1222,7 @@
         };
         ws.onerror = () => {
             isCalling = false;
+            showToast('llb test2');
             updateCallControls();
             stopRecording();
             if (wsShouldShowError) {
@@ -1832,21 +1696,6 @@
         updateMicUI();
         updateInterruptUI();
         updateSubtitle();
-        
-        // 初始化字幕和文本输入框状态
-        if (subtitleOn) {
-            subtitleArea.classList.remove('off');
-            subtitleToggle.classList.add('active');
-        } else {
-            subtitleArea.classList.add('off');
-            subtitleToggle.classList.remove('active');
-        }
-        
-        if (textInputOn) {
-            textInputArea.classList.remove('hide');
-        } else {
-            textInputArea.classList.add('hide');
-        }
     }
 
     //获取地址栏参数
