@@ -1,0 +1,31 @@
+server:
+  port: 8861
+  servlet:
+    context-path: /vchat
+
+spring:
+  application:
+    name: voice-chat
+  profiles:
+    active:
+      - local
+  ai:
+    openai:
+      api-key: sk-51c61705d53440638eaa69ef93b97576
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      chat:
+        options:
+          model: qwen3-max-preview
+    toolcalling:
+      weather:
+        key: sk-51c61705d53440638eaa69ef93b97576
+# 安全码
+chat:
+  api-key: sk-51c61705d53440638eaa69ef93b97576
+  security: deGa2025
+  welcome-message: 喂，是谁呀
+
+logging:
+  level:
+    com.xc.voicechat: debug
+    org.springframework.web: debug
