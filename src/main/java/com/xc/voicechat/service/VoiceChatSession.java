@@ -77,6 +77,8 @@ public class VoiceChatSession implements AutoCloseable {
     }
 
     public void processAudioFrame(byte[] audioData) {
+        // TODO: 这里可以添加采样率检测和转换逻辑
+        // 目前假设前端发送的是正确的16000Hz PCM数据
         asrService.processAudioFrame(audioData);
     }
 

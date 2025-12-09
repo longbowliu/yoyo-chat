@@ -1323,19 +1323,43 @@
         if (ws && ws.readyState === WebSocket.OPEN) {
             ws.send("start");
         }
+        // 请求音频流，不强制指定采样率，让系统自动选择
         const stream = await navigator.mediaDevices.getUserMedia({
             audio: {
                 echoCancellation: true,
                 noiseSuppression: true,
                 autoGainControl: true,
-                channelCount: 1,
-                sampleRate: 16000
+                channelCount: 1
+                // 移除 sampleRate: 16000，让系统自动选择
             }
         });
         if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 16000});
+            // 创建AudioContext，先尝试使用16000采样率，如果不支持则使用系统默认
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 16000});
+            } catch (e) {
+                // 如果16000采样率不支持，使用系统默认采样率
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
         }
-        audioSource = audioContext.createMediaStreamSource(stream);
+        
+        // 检查AudioContext是否已创建，如果采样率不匹配则重新创建
+        if (audioContext.state === 'closed') {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 16000});
+            } catch (e) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+        
+        try {
+            audioSource = audioContext.createMediaStreamSource(stream);
+        } catch (e) {
+            // 如果采样率不匹配，使用系统默认采样率重新创建AudioContext
+            audioContext.close();
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            audioSource = audioContext.createMediaStreamSource(stream);
+        }
         mediaStream = stream;
 
         // 检查AudioWorklet支持
